@@ -48,42 +48,42 @@ def home():
 
 
 
-# @app.route('/recommend', methods = ['POST'])
-# def recommend():
-#     if(request.method =='POST'):
+@app.route('/recommend', methods = ['POST'])
+def recommend():
+    # if(request.method =='POST'):
 
-#         try:
-#             # Get values from browser
-#             user_id = request.form.get('user_id')
+        # try:
+        #     # Get values from browser
+        #     user_id = request.form.get('user_id')
 
-#             # Recommending the Top 15 products to the user.
-#             top20 = recommendations.loc[user_id].sort_values(ascending = False).head(20)
-#             top20_df = pd.DataFrame(top20.reset_index(name = 'rating'))
+        #     # Recommending the Top 15 products to the user.
+        #     top20 = recommendations.loc[user_id].sort_values(ascending = False).head(20)
+        #     top20_df = pd.DataFrame(top20.reset_index(name = 'rating'))
 
-#             # get the dataset with tf-idf values for the Top 15 recommended products
-#             pred_df_temp = pred_df[pred_df.id.isin(top20_df.id.to_list())]
+        #     # get the dataset with tf-idf values for the Top 15 recommended products
+        #     pred_df_temp = pred_df[pred_df.id.isin(top20_df.id.to_list())]
 
-#             # Predict the sentiments for these products using the sentiment model
-#             sentiment = model.predict(pred_df_temp[pred_df_temp.columns.difference(['id', 'name', 'reviews'])])
-#             sentiment_df = pd.DataFrame(sentiment, columns = ['sentiment'])
+        #     # Predict the sentiments for these products using the sentiment model
+        #     sentiment = model.predict(pred_df_temp[pred_df_temp.columns.difference(['id', 'name', 'reviews'])])
+        #     sentiment_df = pd.DataFrame(sentiment, columns = ['sentiment'])
 
-#             pred_df_temp = pd.concat([pred_df_temp.reset_index(drop = True) , sentiment_df.reset_index(drop = True)], axis = 1)
+        #     pred_df_temp = pd.concat([pred_df_temp.reset_index(drop = True) , sentiment_df.reset_index(drop = True)], axis = 1)
 
-#             results_df = pred_df_temp.groupby(['id', 'name']).agg(sum = ('sentiment' , 'sum'), count = ('id', 'count')).reset_index().sort_values(by = 'sum' ,ascending = False)
-#             results_df['Positive Sentiment %'] = round((results_df['sum']/ results_df['count'] * 100 ),2)
-#             results_df = pd.merge(top20_df, results_df , on = 'id', how = 'left')
+        #     results_df = pred_df_temp.groupby(['id', 'name']).agg(sum = ('sentiment' , 'sum'), count = ('id', 'count')).reset_index().sort_values(by = 'sum' ,ascending = False)
+        #     results_df['Positive Sentiment %'] = round((results_df['sum']/ results_df['count'] * 100 ),2)
+        #     results_df = pd.merge(top20_df, results_df , on = 'id', how = 'left')
 
-#             result = results_df.sort_values(by = ['Positive Sentiment %'], ascending = False).head(5).to_dict(orient = 'records')
+        #     result = results_df.sort_values(by = ['Positive Sentiment %'], ascending = False).head(5).to_dict(orient = 'records')
 
-#             return render_template('index.html', len = len(result), result = result, message = 'TOP 5 recommended products for User: ' + user_id)
+        #     return render_template('index.html', len = len(result), result = result, message = 'TOP 5 recommended products for User: ' + user_id)
 
-#         except Exception as err:
-#             # message = err
-#             message = 'Invalid User! Try again'
-#             return render_template('index.html', len = 0, message = message)
+        # except Exception as err:
+        #     # message = err
+        #     message = 'Invalid User! Try again'
+        #     return render_template('index.html', len = 0, message = message)
 
-#     else:
-#        return render_template('index.html', len = 0,message = '') 
+    # else:
+       return render_template('index.html', len = 0,message = '') 
     
 
 
