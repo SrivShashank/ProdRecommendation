@@ -75,7 +75,7 @@ def prediction(reviews_df):
         X_tfidf_train, y_train)
 
     # Using Logistic Regression on TFIDF
-    logreg = LogisticRegression(C=5, random_state=42)
+    logreg = LogisticRegression(C=5, random_state=42,solver='liblinear')
     logreg.fit(X_tfidf_train, y_tfidf_train)
 
     # Saving the model in a pickle file
